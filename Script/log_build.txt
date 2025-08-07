@@ -1,0 +1,23 @@
+------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes
+> /Research Assistanceship/CodingTask-SamuelSuarez/Script/log_build.txt
+  log type:  text
+ opened on:   6 Aug 2025, 21:56:30
+
+.   
+.   
+.  * Load raw data
+.  
+.  use "$raw_data/pwt1001.dta"
+
+.  
+.  
+.  * 
+. 
+end of do-file
+
+. br
+
+. br
+
