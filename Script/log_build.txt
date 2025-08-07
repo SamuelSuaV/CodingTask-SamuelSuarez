@@ -3,7 +3,7 @@
        log:  /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes
 > /Research Assistanceship/CodingTask-SamuelSuarez/Script/log_build.txt
   log type:  text
- opened on:   6 Aug 2025, 21:56:30
+ opened on:   7 Aug 2025, 00:37:01
 
 .   
 .   
@@ -13,11 +13,23 @@
 
 .  
 .  
-.  * 
+.  * Keep useful data
+.  
+.  keep if  year >= 1990 // by year
+(7,320 observations deleted)
+
+.  keep country year cgdpo pop ctfp labsh // by variable
+
+.  
+.  
+.  * Create GDP/Capita variable
+.  
+.  gen  cgdpo_capita = cgdpo/(pop*1000000) // measured in millions like cgdpo
+(34 missing values generated)
+
+.  
 . 
 end of do-file
-
-. br
 
 . br
 
