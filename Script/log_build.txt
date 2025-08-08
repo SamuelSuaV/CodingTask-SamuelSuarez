@@ -3,7 +3,7 @@
        log:  /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes
 > /Research Assistanceship/CodingTask-SamuelSuarez/Script/log_build.txt
   log type:  text
- opened on:   7 Aug 2025, 00:37:01
+ opened on:   7 Aug 2025, 19:58:12
 
 .   
 .   
@@ -13,7 +13,7 @@
 
 .  
 .  
-.  * Keep useful data
+.  * Keep requiered data
 .  
 .  keep if  year >= 1990 // by year
 (7,320 observations deleted)
@@ -27,6 +27,136 @@
 .  gen  cgdpo_capita = cgdpo/(pop*1000000) // measured in millions like cgdpo
 (34 missing values generated)
 
+.  
+.  * Logarithmic GDP per capiuta and TFP
+.  
+.  gen log_cgdpo_capita = log(cgdpo_capita)
+(34 missing values generated)
+
+.  gen log_ctfp = log(ctfp)
+(2,010 missing values generated)
+
+.  
+.  * Panel data setup
+.  
+.  encode country, gen(country_id) // this variable is an id for the xtset com
+> mand
+
+.  xtset country_id year // used id since xtset only allows for number type da
+> ta
+
+Panel variable: country_id (strongly balanced)
+ Time variable: year, 1990 to 2019
+         Delta: 1 unit
+
+.  
+.  * Creation of new variables
+.  
+.         * GDP
+.  gen fd_log_cgdpo_capita = log_cgdpo_capita - L.log_cgdpo_capita // first di
+> ff log
+(219 missing values generated)
+
+.  gen gwth_cgdpo_capita = (cgdpo_capita - L.cgdpo_capita)*100/L.cgdpo_capita 
+> // growth rate
+(219 missing values generated)
+
+.  
+.  gen cgdpo_capita_1990 = . // empty var for storing 1990 gdp
+(5,490 missing values generated)
+
+.  replace cgdpo_capita_1990 = cgdpo_capita if year == 1990 // copies 1990 gdp
+>  into a new variable
+(181 real changes made)
+
+.  bysort country (year): /// loop for each country in ascending year order
+>         replace cgdpo_capita_1990 = cgdpo_capita_1990[_n-1] if missing(cgdpo
+> _capita_1990)
+(5,249 real changes made)
+
+.         // fills column for a country with 1990 GDP data, using the data poi
+> nt from 1990
+.  gen cum_gr_cgdpo_capita = (cgdpo_capita - cgdpo_capita_1990)*100 / cgdpo_ca
+> pita_1990 
+(64 missing values generated)
+
+.  // uses 1990 gdp row to calculate cumulative growth
+.  drop cgdpo_capita_1990 // removes now useless variable
+
+.    
+.         * TFP
+.  xtset country_id year // solves error where stata forgets the panel data fo
+> rmat
+
+Panel variable: country_id (strongly balanced)
+ Time variable: year, 1990 to 2019
+         Delta: 1 unit
+
+.  
+.  gen fd_log_ctfp = log_ctfp - L.log_ctfp // first diff log
+(2,128 missing values generated)
+
+.  gen gwth_ctfp = (ctfp - L.ctfp) * 100 / L.ctfp // growth rate
+(2,128 missing values generated)
+
+. 
+.  gen ctfp_1990 = . // empty var for storing 1990 ctfp
+(5,490 missing values generated)
+
+.  replace ctfp_1990 = ctfp if year == 1990 // copies 1990 ctfp into a new var
+> iable
+(103 real changes made)
+
+.  bysort country (year): /// loop for each country in ascending year order
+>      replace ctfp_1990 = ctfp_1990[_n-1] if missing(ctfp_1990) // fills colu
+> mn for a country with 1990 ctfp data
+(2,987 real changes made)
+
+.  gen cum_gr_ctfp = (ctfp - ctfp_1990) * 100 / ctfp_1990 // uses 1990 ctfp ro
+> w to calculate cumulative growth
+(2,400 missing values generated)
+
+.  drop ctfp_1990 // removes now useless variable 
+
+.  
+.         * Labor share
+.  xtset country_id year // solves error where stata forgets the panel data fo
+> rmat
+
+Panel variable: country_id (strongly balanced)
+ Time variable: year, 1990 to 2019
+         Delta: 1 unit
+
+.  
+.  gen gwth_labsh = (labsh - L.labsh) * 100 / L.labsh // growth rate
+(1,511 missing values generated)
+
+. 
+.  gen labsh_1990 = . // empty var for storing 1990 labsh
+(5,490 missing values generated)
+
+.  replace labsh_1990 = labsh if year == 1990 // copies 1990 labsh into a new 
+> variable
+(134 real changes made)
+
+.  bysort country (year): /// loop for each country in ascending year order
+>     replace labsh_1990 = labsh_1990[_n-1] if missing(labsh_1990) // fills co
+> lumn for a country with 1990 labsh data
+(3,886 real changes made)
+
+.  gen cum_gr_labsh = (labsh - labsh_1990) * 100 / labsh_1990 // uses 1990 lab
+> sh row to calculate cumulative growth
+(1,470 missing values generated)
+
+.  drop labsh_1990 // removes now useless variable
+
+.  
+.  * Save dataset
+.   save "$processed_data/build_dofile.dta", replace
+file Data/processed/build_dofile.dta saved
+
+.  
+. 
 .  
 . 
 end of do-file
