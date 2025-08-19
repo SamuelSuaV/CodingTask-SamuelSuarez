@@ -63,16 +63,16 @@
  * Log TFP
  
   twoway ///
-    (line log_rtfpna year if country_id == 176, lcolor(blue)) ///
-    (line log_rtfpna year if country_id == 25, lcolor(red)) ///
-    (line log_rtfpna year if country_id == 42, lcolor(green)) ///
-    (line log_rtfpna year if country_id == 65, lcolor(orange)) ///
-    (line log_rtfpna year if country_id == 69, lcolor(purple)), ///
+    (line log_ctfp year if country_id == 176, lcolor(blue)) ///
+    (line log_ctfp year if country_id == 25, lcolor(red)) ///
+    (line log_ctfp year if country_id == 42, lcolor(green)) ///
+    (line log_ctfp year if country_id == 65, lcolor(orange)) ///
+    (line log_ctfp year if country_id == 69, lcolor(purple)), ///
     title("Evolution of log total factor productivity") ///
 	subtitle("For USA, Brazil, Colombia, France and Germany (1990-2019)") ///
     legend(order(1 "USA" 2 "Brazil" 3 "Colombia" 4 "France" 5 "Germany")) ///
 	ytitle("Log total factor productivity") ///
-	note("TFP measured at constant national prices (2017=1)")
+	note("TFP measured at current PPPs (USA = 1)")
 	
  graph save "$output/log_tfp_graph.gph", replace
 
@@ -120,21 +120,21 @@
    * Cumulative TFP growth
  
  twoway ///
-    (area cum_gr_rtfpna year if country_id == 176, fcolor(blue%20) ///
+    (area cum_gr_ctfp year if country_id == 176, fcolor(blue%20) ///
 	lcolor(blue)) ///
-    (area cum_gr_rtfpna year if country_id == 25, fcolor(red%20) ///
+    (area cum_gr_ctfp year if country_id == 25, fcolor(red%20) ///
 	lcolor(red)) ///
-    (area cum_gr_rtfpna year if country_id == 42, fcolor(green%20) ///
+    (area cum_gr_ctfp year if country_id == 42, fcolor(green%20) ///
 	lcolor(green)) ///
-    (area cum_gr_rtfpna year if country_id == 65, fcolor(orange%20) ///
+    (area cum_gr_ctfp year if country_id == 65, fcolor(orange%20) ///
 	lcolor(orange)) ///
-    (area cum_gr_rtfpna year if country_id == 69, fcolor(purple%20) ///
+    (area cum_gr_ctfp year if country_id == 69, fcolor(purple%20) ///
 	lcolor(purple)), ///
     title("Evolution of cumulative total factor productivity growth since 1990") ///
     subtitle("For USA, Brazil, Colombia, France and Germany (until 2019)") ///
     legend(order(1 "USA" 2 "Brazil" 3 "Colombia" 4 "France" 5 "Germany")) ///
     ytitle("Cumulative total factor productivity growth") ///
-    note("TFP measured at national prices (2017=1))")
+    note("TFP measured at current PPPs (USA = 1))")
 	
   graph save "$output/cumgrowth_tfp_graph.gph", replace
   
@@ -174,36 +174,36 @@
 										// We eliminate the 1% tail ends of
 										// the distribution to avoid outliers
 											
-   centile cum_gr_rtfpna, centile(1 99) // TFP outliers
-   keep if cum_gr_rtfpna >= r(c_1) & cum_gr_rtfpna <= r(c_2)
+   centile cum_gr_ctfp, centile(1 99) // TFP outliers
+   keep if cum_gr_ctfp >= r(c_1) & cum_gr_ctfp <= r(c_2)
    
 	twoway ///
-		(scatter cum_gr_cgdpo_capita cum_gr_rtfpna ///
+		(scatter cum_gr_cgdpo_capita cum_gr_ctfp ///
 			if !inlist(country, "United States", "Brazil", "Colombia", "France", "Germany"), ///
 			mcolor(black%20)) /// All other countries in black
-		(scatter cum_gr_cgdpo_capita cum_gr_rtfpna ///
+		(scatter cum_gr_cgdpo_capita cum_gr_ctfp ///
 			if inlist(country, "United States"), mcolor(blue) ///
 			mlabel(country) mlabcolor(blue)) /// Label for USA
-		(scatter cum_gr_cgdpo_capita cum_gr_rtfpna ///
+		(scatter cum_gr_cgdpo_capita cum_gr_ctfp ///
 			if inlist(country, "Brazil"), mcolor(red) ///
 			mlabel(country) mlabcolor(red)) /// Label for Brazil
-		(scatter cum_gr_cgdpo_capita cum_gr_rtfpna ///
+		(scatter cum_gr_cgdpo_capita cum_gr_ctfp ///
 			if inlist(country, "Colombia"), mcolor(green) ///
 			mlabel(country) mlabcolor(green) mlabposition(6)) /// Label for Colombia
-		(scatter cum_gr_cgdpo_capita cum_gr_rtfpna ///
+		(scatter cum_gr_cgdpo_capita cum_gr_ctfp ///
 			if inlist(country, "France"), mcolor(orange) ///
 			mlabel(country) mlabcolor(orange)) /// Label for France
-		(scatter cum_gr_cgdpo_capita cum_gr_rtfpna ///
+		(scatter cum_gr_cgdpo_capita cum_gr_ctfp ///
 			if inlist(country, "Germany"), mcolor(purple) ///
 			mlabel(country) mlabcolor(purple)), /// Label for Germany
 		title("Relationship between  TFP and cumulative GDP growth" ///
 		  "from 1990 to 2019") ///
-		xtitle("Total factor productivity (national prices, 2017 = 1)") ///
+		xtitle("Total factor productivity (current PPPs, USA )") ///
 		ytitle("Cumulative GDP per capita growth") ///
 		legend(off) ///
 		note("Cumulative growth from 1990 to 2019")
 		
-  graph save "$output/cumgrowthgdp_rtfpna_graph.gph", replace
+  graph save "$output/cumgrowthgdp_ctfp_graph.gph", replace
   
  restore
   

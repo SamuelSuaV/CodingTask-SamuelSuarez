@@ -1,9 +1,9 @@
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research Assistanceship/CodingTask-Samu
-> elSuarez/Script/log_build.txt
+       log:  /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Resear
+> ch Assistanceship/CodingTask-SamuelSuarez/Script/log_build.txt
   log type:  text
- opened on:  18 Aug 2025, 21:26:05
+ opened on:  18 Aug 2025, 22:03:54
 
 .   
 .   
@@ -18,7 +18,7 @@
 .  keep if  year >= 1990 // by year
 (7,320 observations deleted)
 
-.  keep country year cgdpo pop rtfpna labsh // by variable
+.  keep country year cgdpo pop ctfp labsh // by variable
 
 .  
 .  
@@ -33,7 +33,7 @@
 .  gen log_cgdpo_capita = log(cgdpo_capita)
 (34 missing values generated)
 
-.  gen log_rtfpna = log(rtfpna)
+.  gen log_ctfp = log(ctfp)
 (2,010 missing values generated)
 
 .  
@@ -54,22 +54,27 @@ Panel variable: country_id (strongly balanced)
 .  gen fd_log_cgdpo_capita = log_cgdpo_capita - L.log_cgdpo_capita // first diff log
 (219 missing values generated)
 
-.  gen gwth_cgdpo_capita = (cgdpo_capita - L.cgdpo_capita)*100/L.cgdpo_capita // growth rate
+.  gen gwth_cgdpo_capita = (cgdpo_capita - L.cgdpo_capita)*100/L.cgdpo_capita // grow
+> th rate
 (219 missing values generated)
 
 .  
 .  gen cgdpo_capita_1990 = . // empty var for storing 1990 gdp
 (5,490 missing values generated)
 
-.  replace cgdpo_capita_1990 = cgdpo_capita if year == 1990 // copies 1990 gdp into a new variable
+.  replace cgdpo_capita_1990 = cgdpo_capita if year == 1990 // copies 1990 gdp into a
+>  new variable
 (181 real changes made)
 
 .  bysort country (year): /// loop for each country in ascending year order
->         replace cgdpo_capita_1990 = cgdpo_capita_1990[_n-1] if missing(cgdpo_capita_1990)
+>         replace cgdpo_capita_1990 = cgdpo_capita_1990[_n-1] if missing(cgdpo_capita
+> _1990)
 (5,249 real changes made)
 
-.         // fills column for a country with 1990 GDP data, using the data point from 1990
-.  gen cum_gr_cgdpo_capita = (cgdpo_capita - cgdpo_capita_1990)*100 / cgdpo_capita_1990 
+.         // fills column for a country with 1990 GDP data, using the data point from
+>  1990
+.  gen cum_gr_cgdpo_capita = (cgdpo_capita - cgdpo_capita_1990)*100 / cgdpo_capita_19
+> 90 
 (64 missing values generated)
 
 .  // uses 1990 gdp row to calculate cumulative growth
@@ -84,29 +89,29 @@ Panel variable: country_id (strongly balanced)
          Delta: 1 unit
 
 .  
-.  gen fd_log_rtfpna = log_rtfpna - L.log_rtfpna // first diff log
+.  gen fd_log_ctfp = log_ctfp - L.log_ctfp // first diff log
 (2,128 missing values generated)
 
-.  gen gwth_rtfpna = (rtfpna - L.rtfpna) * 100 / L.rtfpna // growth rate
+.  gen gwth_ctfp = (ctfp - L.ctfp) * 100 / L.ctfp // growth rate
 (2,128 missing values generated)
 
 . 
-.  gen rtfpna_1990 = . // empty var for storing 1990 rtfpna
+.  gen ctfp_1990 = . // empty var for storing 1990 ctfp
 (5,490 missing values generated)
 
-.  replace rtfpna_1990 = rtfpna if year == 1990 // copies 1990 rtfpna into a new variable
+.  replace ctfp_1990 = ctfp if year == 1990 // copies 1990 ctfp into a new variable
 (103 real changes made)
 
 .  bysort country (year): /// loop for each country in ascending year order
->      replace rtfpna_1990 = rtfpna_1990[_n-1] if missing(rtfpna_1990) // fills column for a country with 1990 rtfpna 
-> data
+>      replace ctfp_1990 = ctfp_1990[_n-1] if missing(ctfp_1990) // fills column for 
+> a country with 1990 ctfp data
 (2,987 real changes made)
 
-.  gen cum_gr_rtfpna = (rtfpna - rtfpna_1990) * 100 / rtfpna_1990 // uses 1990 rtfpna row to calculate cumulative grow
-> th
+.  gen cum_gr_ctfp = (ctfp - ctfp_1990) * 100 / ctfp_1990 // uses 1990 ctfp row to ca
+> lculate cumulative growth
 (2,400 missing values generated)
 
-.  drop rtfpna_1990 // removes now useless variable 
+.  drop ctfp_1990 // removes now useless variable 
 
 .  
 .         * Labor share
@@ -124,14 +129,17 @@ Panel variable: country_id (strongly balanced)
 .  gen labsh_1990 = . // empty var for storing 1990 labsh
 (5,490 missing values generated)
 
-.  replace labsh_1990 = labsh if year == 1990 // copies 1990 labsh into a new variable
+.  replace labsh_1990 = labsh if year == 1990 // copies 1990 labsh into a new variabl
+> e
 (134 real changes made)
 
 .  bysort country (year): /// loop for each country in ascending year order
->     replace labsh_1990 = labsh_1990[_n-1] if missing(labsh_1990) // fills column for a country with 1990 labsh data
+>     replace labsh_1990 = labsh_1990[_n-1] if missing(labsh_1990) // fills column fo
+> r a country with 1990 labsh data
 (3,886 real changes made)
 
-.  gen cum_gr_labsh = (labsh - labsh_1990) * 100 / labsh_1990 // uses 1990 labsh row to calculate cumulative growth
+.  gen cum_gr_labsh = (labsh - labsh_1990) * 100 / labsh_1990 // uses 1990 labsh row 
+> to calculate cumulative growth
 (1,470 missing values generated)
 
 .  drop labsh_1990 // removes now useless variable
@@ -149,15 +157,13 @@ end of do-file
 
 . do "/var/folders/vp/ytgbt19d06g3xc3mqpf98xg80000gn/T//SD44941.000000"
 
-. *                                  [[Research Assistantship Coding Task]]
-. *                                                                Analysis
-. 
-. * Author: Samuel Suárez
-. 
-.  cls
+.     title("Evolution of log total factor productivity") ///
 
-.  clear all
+end of do-file
 
-.  set more off
+. do "/var/folders/vp/ytgbt19d06g3xc3mqpf98xg80000gn/T//SD44941.000000"
 
-.  cap log close
+.     title("Evolution of log total factor productivity") ///
+
+end of do-file
+
