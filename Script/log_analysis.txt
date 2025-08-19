@@ -3,7 +3,7 @@
        log:  /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Resear
 > ch Assistanceship/CodingTask-SamuelSuarez/Script/log_analysis.txt
   log type:  text
- opened on:  18 Aug 2025, 22:01:43
+ opened on:  18 Aug 2025, 23:47:56
 
 .   
 .  * Load processed data
@@ -42,9 +42,10 @@ Panel variable: country_id (strongly balanced)
 >         note("GDP per capita measured at current PPPs in 2017 USD")
 
 .         
-.  graph save "$output/log_gdp_capita_graph.gph", replace
-(file Output/log_gdp_capita_graph.gph not found)
-file Output/log_gdp_capita_graph.gph saved
+.  graph export "$output/log_gdp_capita_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/log_gdp_capita_graph.pdf saved as
+    PDF format
 
 .  
 .  
@@ -60,12 +61,13 @@ file Output/log_gdp_capita_graph.gph saved
 >         subtitle("For USA, Brazil, Colombia, France and Germany (1990-2019)") ///
 >     legend(order(1 "USA" 2 "Brazil" 3 "Colombia" 4 "France" 5 "Germany")) ///
 >         ytitle("Log total factor productivity") ///
->         note("TFP measured at constant national prices (2017=1)")
+>         note("TFP measured at current PPPs (USA = 1)")
 
 .         
-.  graph save "$output/log_tfp_graph.gph", replace
-(file Output/log_tfp_graph.gph not found)
-file Output/log_tfp_graph.gph saved
+.  graph export "$output/log_tfp_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/log_tfp_graph.pdf saved as PDF
+    format
 
 . 
 .  
@@ -84,8 +86,10 @@ file Output/log_tfp_graph.gph saved
 >         note("Labor share measured at current national prices")
 
 .         
-.  graph save "$output/log_tfp_graph.gph", replace
-file Output/log_tfp_graph.gph saved
+.  graph export "$output/labsh_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/labsh_graph.pdf saved as PDF
+    format
 
 .  
 .  // Cumulative growth plots
@@ -110,9 +114,10 @@ file Output/log_tfp_graph.gph saved
 >     note("GDP per capita measured at current PPPs")
 
 .         
-.   graph save "$output/cumgrowth_gdp_capita_graph.gph", replace
-(file Output/cumgrowth_gdp_capita_graph.gph not found)
-file Output/cumgrowth_gdp_capita_graph.gph saved
+.   graph export "$output/cumgrowth_gdp_capita_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/cumgrowth_gdp_capita_graph.pdf
+    saved as PDF format
 
 .   
 .   
@@ -134,12 +139,13 @@ file Output/cumgrowth_gdp_capita_graph.gph saved
 >     subtitle("For USA, Brazil, Colombia, France and Germany (until 2019)") ///
 >     legend(order(1 "USA" 2 "Brazil" 3 "Colombia" 4 "France" 5 "Germany")) ///
 >     ytitle("Cumulative total factor productivity growth") ///
->     note("TFP measured at national prices (2017=1))")
+>     note("TFP measured at current PPPs (USA = 1))")
 
 .         
-.   graph save "$output/cumgrowth_tfp_graph.gph", replace
-(file Output/cumgrowth_tfp_graph.gph not found)
-file Output/cumgrowth_tfp_graph.gph saved
+.   graph export "$output/cumgrowth_tfp_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/cumgrowth_tfp_graph.pdf saved as
+    PDF format
 
 .   
 .   * Cumulative labor share growth 
@@ -162,9 +168,10 @@ file Output/cumgrowth_tfp_graph.gph saved
 >     note("Labor share measured at current national prices")
 
 .         
-.  graph save "$output/cumgrowth_labsh_graph.gph", replace
-(file Output/cumgrowth_labsh_graph.gph not found)
-file Output/cumgrowth_labsh_graph.gph saved
+.  graph export "$output/cumgrowth_labsh_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/cumgrowth_labsh_graph.pdf saved
+    as PDF format
 
 .   
 .  // Scatter plots
@@ -236,15 +243,16 @@ cum_gr_cgd~a |       181          1   -64.15829       -97.04807   -38.76037*
 >                         mlabel(country) mlabcolor(purple)), /// Label for Germany
 >                 title("Relationship between  TFP and cumulative GDP growth" ///
 >                   "from 1990 to 2019") ///
->                 xtitle("Total factor productivity (national prices, 2017 = 1)") ///
+>                 xtitle("Total factor productivity (current PPPs, USA = 1)") ///
 >                 ytitle("Cumulative GDP per capita growth") ///
 >                 legend(off) ///
 >                 note("Cumulative growth from 1990 to 2019")
 
 .                 
-.   graph save "$output/cumgrowthgdp_ctfp_graph.gph", replace
-(file Output/cumgrowthgdp_ctfp_graph.gph not found)
-file Output/cumgrowthgdp_ctfp_graph.gph saved
+.   graph export "$output/cumgrowthgdp_ctfp_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/cumgrowthgdp_ctfp_graph.pdf saved
+    as PDF format
 
 .   
 .  restore
@@ -322,9 +330,10 @@ cum_gr_cgd~a |       132          1   -80.76133       -97.04807    -25.4567*
 
 . 
 .                 
-.           graph save "$output/cumgrowthlabsh_gdp_graph.gph", replace
-(file Output/cumgrowthlabsh_gdp_graph.gph not found)
-file Output/cumgrowthlabsh_gdp_graph.gph saved
+.           graph export "$output/cumgrowthlabsh_gdp_graph.pdf", as(pdf) replace
+file /Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research
+    Assistanceship/CodingTask-SamuelSuarez/Output/cumgrowthlabsh_gdp_graph.pdf
+    saved as PDF format
 
 .                 
 .  restore
@@ -335,18 +344,3 @@ file Output/cumgrowthlabsh_gdp_graph.gph saved
 . 
 end of do-file
 
-. do "/Users/samuel/Library/CloudStorage/OneDrive-Universidaddelosandes/Research Assi
-> stanceship/CodingTask-SamuelSuarez/Script/Build.do"
-
-. *                                  [[Research Assistantship Coding Task]]
-. *                                                                       Build
-. 
-. * Author: Samuel Suárez
-. 
-.  cls
-
-.  clear all
-
-.  set more off
-
-.  cap log close

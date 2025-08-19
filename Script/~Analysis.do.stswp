@@ -57,7 +57,7 @@
 	ytitle("Log output side GDP per capita") ///
 	note("GDP per capita measured at current PPPs in 2017 USD")
 	
- graph save "$output/log_gdp_capita_graph.gph", replace
+ graph export "$output/log_gdp_capita_graph.pdf", as(pdf) replace
  
  
  * Log TFP
@@ -74,7 +74,7 @@
 	ytitle("Log total factor productivity") ///
 	note("TFP measured at current PPPs (USA = 1)")
 	
- graph save "$output/log_tfp_graph.gph", replace
+ graph export "$output/log_tfp_graph.pdf", as(pdf) replace
 
  
   * Labor share
@@ -91,7 +91,7 @@
 	ytitle("Labor share") ///
 	note("Labor share measured at current national prices")
 	
- graph save "$output/log_tfp_graph.gph", replace
+ graph export "$output/labsh_graph.pdf", as(pdf) replace
  
  // Cumulative growth plots
   
@@ -114,7 +114,7 @@
     ytitle("Cumulative GDP per capita growth") ///
     note("GDP per capita measured at current PPPs")
 	
-  graph save "$output/cumgrowth_gdp_capita_graph.gph", replace
+  graph export "$output/cumgrowth_gdp_capita_graph.pdf", as(pdf) replace
   
   
    * Cumulative TFP growth
@@ -136,7 +136,7 @@
     ytitle("Cumulative total factor productivity growth") ///
     note("TFP measured at current PPPs (USA = 1))")
 	
-  graph save "$output/cumgrowth_tfp_graph.gph", replace
+  graph export "$output/cumgrowth_tfp_graph.pdf", as(pdf) replace
   
   * Cumulative labor share growth 
   
@@ -157,7 +157,7 @@
     ytitle("Cumulative labor share growth") ///
     note("Labor share measured at current national prices")
 	
- graph save "$output/cumgrowth_labsh_graph.gph", replace
+ graph export "$output/cumgrowth_labsh_graph.pdf", as(pdf) replace
   
  // Scatter plots
   
@@ -198,12 +198,12 @@
 			mlabel(country) mlabcolor(purple)), /// Label for Germany
 		title("Relationship between  TFP and cumulative GDP growth" ///
 		  "from 1990 to 2019") ///
-		xtitle("Total factor productivity (current PPPs, USA )") ///
+		xtitle("Total factor productivity (current PPPs, USA = 1)") ///
 		ytitle("Cumulative GDP per capita growth") ///
 		legend(off) ///
 		note("Cumulative growth from 1990 to 2019")
 		
-  graph save "$output/cumgrowthgdp_ctfp_graph.gph", replace
+  graph export "$output/cumgrowthgdp_ctfp_graph.pdf", as(pdf) replace
   
  restore
   
@@ -248,7 +248,7 @@
 		note("Cumulative growth from 1990 to 2019")
 
 		
-	  graph save "$output/cumgrowthlabsh_gdp_graph.gph", replace
+	  graph export "$output/cumgrowthlabsh_gdp_graph.pdf", as(pdf) replace
 		
  restore
 

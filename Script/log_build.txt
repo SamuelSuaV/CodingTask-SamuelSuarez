@@ -167,3 +167,17 @@ end of do-file
 
 end of do-file
 
+. do "/var/folders/vp/ytgbt19d06g3xc3mqpf98xg80000gn/T//SD44941.000000"
+
+. *                                  [[Research Assistantship Coding Task]]
+. *                                                                Analysis
+. 
+. * Author: Samuel Suárez
+. 
+.  cls
+
+.  clear all
+
+.  set more off
+
+.  cap log close
