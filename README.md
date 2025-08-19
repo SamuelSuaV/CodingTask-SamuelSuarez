@@ -1,7 +1,10 @@
-# CodingTask-SamuelSuarez
-Repository for research assistanceship.
+CodingTask – Samuel Suárez
 
-Includes: 
-- Stata scripts in "Script" folder
-- Input files in "Data" folder
-- Output files in "Output" folder
+Repositorio asociado a actividades de asistencias de investigación.
+
+Estructura del proyecto:
+	•	📁 Script/ – Contiene los scripts utilizados (principalmente en Stata).
+	•	📁 Data/ – Archivos de entrada utilizados por los scripts.
+	•	📁 Output/ – Resultados generados (tablas, gráficos, bases procesadas, etc.).
+
+⸻

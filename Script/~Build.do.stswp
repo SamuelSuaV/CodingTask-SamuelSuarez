@@ -1,4 +1,4 @@
-* 				   [[Research Assistantshipn Coding Task]]
+* 				   [[Research Assistantship Coding Task]]
 *					 				Build
 
 * Author: Samuel Suárez
@@ -37,17 +37,17 @@
  * Keep requiered data
  
  keep if  year >= 1990 // by year
- keep country year cgdpo pop ctfp labsh // by variable
+ keep country year cgdpo pop rtfpna labsh // by variable
  
  
  * Create GDP/Capita variable
  
- gen  cgdpo_capita = cgdpo/(pop*1000000) // measured in millions like cgdpo
+ gen  cgdpo_capita = cgdpo/(pop) // measured in units unlike cgdpo
  
  * Logarithmic GDP per capiuta and TFP
  
  gen log_cgdpo_capita = log(cgdpo_capita)
- gen log_ctfp = log(ctfp)
+ gen log_rtfpna = log(rtfpna)
  
  * Panel data setup
  
@@ -72,15 +72,15 @@
 	* TFP
  xtset country_id year // solves error where stata forgets the panel data format
  
- gen fd_log_ctfp = log_ctfp - L.log_ctfp // first diff log
- gen gwth_ctfp = (ctfp - L.ctfp) * 100 / L.ctfp // growth rate
+ gen fd_log_rtfpna = log_rtfpna - L.log_rtfpna // first diff log
+ gen gwth_rtfpna = (rtfpna - L.rtfpna) * 100 / L.rtfpna // growth rate
 
- gen ctfp_1990 = . // empty var for storing 1990 ctfp
- replace ctfp_1990 = ctfp if year == 1990 // copies 1990 ctfp into a new variable
+ gen rtfpna_1990 = . // empty var for storing 1990 rtfpna
+ replace rtfpna_1990 = rtfpna if year == 1990 // copies 1990 rtfpna into a new variable
  bysort country (year): /// loop for each country in ascending year order
-     replace ctfp_1990 = ctfp_1990[_n-1] if missing(ctfp_1990) // fills column for a country with 1990 ctfp data
- gen cum_gr_ctfp = (ctfp - ctfp_1990) * 100 / ctfp_1990 // uses 1990 ctfp row to calculate cumulative growth
- drop ctfp_1990 // removes now useless variable 
+     replace rtfpna_1990 = rtfpna_1990[_n-1] if missing(rtfpna_1990) // fills column for a country with 1990 rtfpna data
+ gen cum_gr_rtfpna = (rtfpna - rtfpna_1990) * 100 / rtfpna_1990 // uses 1990 rtfpna row to calculate cumulative growth
+ drop rtfpna_1990 // removes now useless variable 
  
 	* Labor share
  xtset country_id year // solves error where stata forgets the panel data format
